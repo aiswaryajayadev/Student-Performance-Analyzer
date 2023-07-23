@@ -1,0 +1,63 @@
+{% extends 'student_template/base_template.html' %}
+{% block page_title %}
+Result
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+                    <div class="row">
+              <div class="col-md-12">
+            <!-- general form elements -->
+
+            <!-- /.card -->
+           <div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">Result</h3>
+    </div>
+
+    {% for sem in semesters %}
+    <div class="table"><br>
+        <h4 align="center"><b>Semester {{ sem }}</b></h4>
+        <table class="table">
+            <tr>
+                <th>ID</th>
+                <th>Subject</th>
+
+                <th>Assignment Marks (10)</th>
+                <th>Exam Marks (90)</th>
+                <th>Total (100)</th>
+                <th>Status</th>
+            </tr>
+            {% for row in studentresult %}
+            {% if row.subject_id.sem_no == sem %}
+            <tr>
+                <td>{{ row.id }}</td>
+                <td>{{ row.subject_id.subject_name }}</td>
+
+                <td>{{ row.subject_assignment_marks }}</td>
+                <td>{{ row.subject_exam_marks }}</td>
+                <td>{{ row.subject_total_marks }}</td>
+                <td>
+                    {% if row.subject_total_marks >= 40 %}
+                    <span class="text-success"><b>PASS</b></span>
+                    {% else %}
+                    <span class="text-danger"><b>FAIL</b></span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+          </div>
+          </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}

@@ -1,0 +1,91 @@
+{% extends 'hod_template/base_template.html' %}
+{% block page_title %}
+Manage Subject
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+           <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h1 class="card-title">Subject Details</h1>
+                  <div class="card-tools">
+                  <a href="/add_subject">Add Subject</a>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Subject Name</th>
+                      <th>Course Name</th>
+                      <th>Course ID</th>
+                      <th>Staff Name</th>
+                        <th>Semester</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for subject in subjects %}
+                    <tr>
+                      <td>{{ subject.id }}</td>
+                      <td>{{ subject.subject_name }}</td>
+                      <td>{{ subject.course_id.course_name }}</td>
+                      <td>{{ subject.course_id.id }}</td>
+                      <td>{{ subject.staff_id.first_name }} {{ subject.staff_id.last_name }}</td>
+                        <td>{{ subject.sem_no }}</td>
+                      <td><a href="/edit_subject/{{ subject.id }}" class="btn btn-success">Edit</a> </td>
+                       <!-- || <a href="/delete_subject/{{ subject.id }}" class="btn btn-danger" >Delete</a> -->
+
+
+                   <div class="form-group">
+                      {% if messages %}
+                        {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                        <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                        {% endif %}
+                        {% if message.tags == 'success' %}
+                        <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                        {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+      </div>
+       <!-- <div class="row">
+{% for subject in courses %}
+
+        <div class="col-lg-3 col-6">
+           small box
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>{{ subject.course_name }}</h3>
+
+                <p>Add Subject</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              <a href="/add_subject" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+        {% endfor %}
+    </div>-->
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}
+

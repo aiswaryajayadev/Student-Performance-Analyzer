@@ -1,0 +1,90 @@
+{% extends 'student_template/base_template.html' %}
+
+
+{% block custom_css %}
+<style>
+.col-lg-3.attendance_div_red {
+    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: #f44336;
+    border: 10px solid white;
+    text-align: center;
+    color: #fff;
+    border-radius: 30px;
+    box-shadow: 1px 1px 1px grey;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.col-lg-3.attendance_div_green {
+    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: #388e3c;
+    border: 10px solid white;
+    text-align: center;
+    color: #fff;
+    border-radius: 30px;
+    box-shadow: 1px 1px 1px grey;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+</style>
+{% endblock custom_css %}
+{% block page_title %}
+Attendance Data
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+                    <div class="row">
+              <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">View Attendance</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+                <div class="card-body">
+   <table class="table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for unique_date, status_set in date_status_list %}
+            <tr>
+                <td>
+                    <div class="attendance_div">
+                        <b>{{ unique_date }}</b>
+                    </div>
+                </td>
+                <td>
+                    {% if True in status_set %}
+                        <p class="text-success"><b>Present</b></p>
+                    {% else %}
+                        <p class="text-danger"><b>Absent</b></p>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+</div>
+
+            <!-- /.card -->
+
+
+
+          </div>
+          </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}

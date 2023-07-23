@@ -1,0 +1,91 @@
+
+{% extends 'staff_template/base_template.html' %}
+{% block page_title %}
+Graph
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+<section class="content" >
+      <div class="container-fluid">
+
+
+              <!-- /.card-header -->
+              <!-- form start -->
+
+
+
+
+  <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">Student Performance</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                  <canvas id="barChart4" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 572px;" width="715" height="312" class="chartjs-render-monitor"></canvas>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+                </div>
+
+    </section>
+    <!-- /.content -->
+
+<!-- ChartJS -->
+
+
+{% endblock main_content %}
+{% block custom_js %}
+<script>
+$(document).ready(function() {
+    var subjects_list = {{ subjects_list|safe }};
+    var students_list = {{ students_list|safe }};
+    var marks_list = {{ marks_list|safe }};
+
+    var datasets = [];
+
+    // Create a dataset for each subject
+
+        var dataset = {
+            label: subjects_list,
+            backgroundColor: 'rgba(60,141,188,0.9)',
+            borderColor: 'rgba(60,141,188,0.8)',
+            pointRadius: false,
+            pointColor: '#3b8bba',
+            pointStrokeColor: 'rgba(60,141,188,1)',
+            pointHighlightFill: '#fff',
+            pointHighlightStroke: 'rgba(60,141,188,1)',
+            data: marks_list,
+        };
+
+        datasets.push(dataset);
+
+
+    var barChartData1 = {
+        labels: students_list,
+        datasets: datasets,
+    };
+
+    var barChartCanvas = $('#barChart4').get(0).getContext('2d');
+    var barChartOptions1 = {
+        responsive: true,
+        maintainAspectRatio: false,
+        datasetFill: false,
+    };
+
+    var barChart = new Chart(barChartCanvas, {
+        type: 'bar',
+        data: barChartData1,
+        options: barChartOptions1
+    });
+});
+</script>
+
+
+{% endblock custom_js %}

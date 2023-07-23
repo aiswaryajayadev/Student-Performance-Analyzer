@@ -1,0 +1,55 @@
+{% extends 'student_template/base_template.html' %}
+{% block page_title %}
+Result
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+                    <div class="row">
+              <div class="col-md-12">
+            <!-- general form elements -->
+
+            <!-- /.card -->
+           <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Result</h3>
+              </div>
+
+               <div class="table">
+               <table class="table">
+                   <tr>
+                       <th>ID</th>
+                       <th>Semester</th>
+                       <th>University CGPA </th>
+                       <th>Status</th>
+                   </tr>
+                   {{ studentresult.id }}
+                   {% for row in studentresult %}
+
+                        <tr>
+                            <td>{{ row.id }}</td>
+                            <td>{{ row.sem_no }}</td>
+                            <td>{{ row.university_marks }}</td>
+
+                            <td>
+                                {% if row.university_marks >= 4 %}
+                               <span class="text-success"><b>PASS</b></span>
+                                {% else %}
+                                 <span class="text-danger"><b>FAIL</b></span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                   {% endfor %}
+               </table>
+               </div>
+            </div>
+
+
+
+          </div>
+          </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}

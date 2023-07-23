@@ -1,0 +1,97 @@
+{% extends 'staff_template/base_template.html' %}
+{% block page_title %}
+Edit Profile
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+   <section class="content">
+      <div class="container-fluid">
+           <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h1 class="card-title">Student Details </h1>
+                  <div class="card-tools">
+                    <!--  <a href="/staff_view_student_marks_graphs/{{ subject_id }}">Graphs</a>-->
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+               <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                        <th>Marks</th>
+                      <th>Action</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for student in students %}
+                    <tr>
+                      <td>{{ student.admin.id }}</td>
+                      <td>{{ student.admin.first_name }} {{ student.admin.last_name }}</td>
+                         <td><a  href="/staff_view_student_university_marks/{{ student.admin.id }}"  class="btn btn-warning btn-sm">
+                              <i class="fas fa-mark"> University Marks </i>
+                              </a>
+                            <a  href="/staff_view_student_sub_marks/{{ student.admin.id }}"  class="btn btn-warning btn-sm">
+                              <i class="fas fa-mark"> Subject Wise </i>
+                              </a>
+
+                        </td>
+                      <td><a  href="/staff_view_student_details/{{ student.admin.id }}"  class="btn btn-primary btn-sm">
+                              <i class="fas fa-folder">  </i>
+                              </a>
+                      </td>
+
+
+
+                    </tr>
+                  {% endfor %}
+                   <div class="form-group">
+                      {% if messages %}
+                        {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                        <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                        {% endif %}
+                        {% if message.tags == 'success' %}
+                        <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                        {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+      </div>
+       <!-- <div class="row">
+{% for subject in courses %}
+
+        <div class="col-lg-3 col-6">
+           small box
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>{{ subject.course_name }}</h3>
+
+                <p>Add Subject</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              <a href="/add_subject" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+        {% endfor %}
+    </div>-->
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}
+
